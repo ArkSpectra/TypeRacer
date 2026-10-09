@@ -1,0 +1,496 @@
+/* ============================================================
+   TypeRacer Arena - Modern Dark Arcade CSS
+   ============================================================ */
+
+:root {
+    --bg-dark: #070d19;
+    --card-bg: #0f172a;
+    --card-border: #1e293b;
+    --accent-sky: #38bdf8;
+    --accent-indigo: #6366f1;
+    --accent-emerald: #10b981;
+    --accent-rose: #f43f5e;
+    --accent-amber: #fbbf24;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.05) 0%, transparent 40%);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0b1120;
+}
+::-webkit-scrollbar-thumb {
+    background: #253349;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #38bdf8;
+}
+
+/* Containers & Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+}
+
+.main-content {
+    flex: 1;
+    padding: 24px 0 48px;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 64px;
+}
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+.brand-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.brand-title span {
+    color: #38bdf8;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(7, 13, 25, 0.6);
+    padding: 4px;
+    border-radius: 14px;
+    border: 1px solid rgba(30, 41, 59, 0.6);
+}
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.nav-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+.nav-btn.active {
+    background: var(--accent-sky);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.auth-nav-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Common Card & Buttons */
+.card {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+.btn:hover {
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(1px);
+}
+.btn-primary {
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
+}
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+}
+.btn-emerald {
+    background: var(--accent-emerald);
+    color: #000;
+    font-weight: 800;
+}
+.btn-slate {
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+}
+.btn-slate:hover {
+    background: #334155;
+    color: #fff;
+}
+.btn-danger {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fb7185;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+/* Form Inputs */
+.form-group {
+    margin-bottom: 16px;
+}
+.form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #080e1a;
+    border: 1px solid #253349;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.form-control:focus {
+    border-color: var(--accent-sky);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+}
+
+/* ============================================================
+   RACE TRACK & MULTI-LANE SYSTEM (Supports up to 40 players)
+   ============================================================ */
+.track-container {
+    background: #090e1a;
+    border-radius: 16px;
+    border: 1px solid #1e293b;
+    padding: 16px;
+    max-height: 420px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lane-item {
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+.lane-item.my-lane {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+.lane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+.lane-name {
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.lane-stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.lane-stats strong {
+    color: var(--accent-sky);
+}
+
+.road-surface {
+    height: 38px;
+    background: #070b14;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 40px,
+        rgba(255, 255, 255, 0.05) 40px,
+        rgba(255, 255, 255, 0.05) 60px
+    );
+}
+
+.road-centerline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.finish-line {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    background: repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 6px,
+        #fff 6px,
+        #fff 12px
+    );
+    opacity: 0.8;
+    border-left: 2px solid #fff;
+}
+
+/* SMART DEAD RECKONING CAR INTERPOLATION */
+.car-runner {
+    position: absolute;
+    left: 8px;
+    width: calc(100% - 60px);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+.car-runner.my-car {
+    transition: transform 0.2s linear; /* Instant for local user */
+}
+
+/* ============================================================
+   TYPING ENGINE (MODE SANTAI)
+   ============================================================ */
+.typing-box {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    line-height: 1.8;
+    padding: 24px;
+    background: #070b14;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    min-height: 140px;
+    cursor: text;
+    user-select: none;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.char-pending {
+    color: #475569;
+}
+.char-correct {
+    color: #22c55e;
+    font-weight: 600;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 2px;
+}
+.char-wrong {
+    color: #f43f5e;
+    background: rgba(244, 63, 94, 0.25);
+    text-decoration: underline;
+    border-radius: 2px;
+}
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: var(--accent-sky);
+    vertical-align: middle;
+    animation: blink 0.8s infinite;
+    box-shadow: 0 0 8px #38bdf8;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.typing-input {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: #0b1120;
+    border: 1px solid #253349;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s;
+}
+.typing-input:focus {
+    border-color: var(--accent-sky);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* ============================================================
+   COUNTDOWN & MODAL
+   ============================================================ */
+.countdown-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 13, 25, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+.countdown-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 120px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #38bdf8, #fbbf24, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: zoomPulse 0.9s infinite;
+}
+
+@keyframes zoomPulse {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Modal Popup */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 16px;
+}
+.modal-dialog {
+    background: #0f172a;
+    border: 1px solid #253349;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 580px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Chat Box */
+.chat-container {
+    background: #090e1a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.chat-messages {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.chat-bubble {
+    background: #111a2e;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+.chat-bubble .sender {
+    font-weight: 700;
+    color: var(--accent-sky);
+    margin-bottom: 2px;
+}

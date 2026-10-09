@@ -1,0 +1,26 @@
+# ============================================================
+# TypeRacer Apache Optimization & Routing (.htaccess)
+# ============================================================
+
+# 1. Enable GZIP / Deflate Compression for super fast loading
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# 2. Prevent Directory Browsing
+Options -Indexes
+
+# 3. Default Index
+DirectoryIndex index.php index.html
+
+# 4. UTF-8 Encoding
+AddDefaultCharset UTF-8
