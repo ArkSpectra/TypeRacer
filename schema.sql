@@ -3,7 +3,6 @@
 -- Database Name: codr8681_TypeRacer
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS `codr8681_TypeRacer` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `codr8681_TypeRacer`;
 
 -- 1. Users Table (Permanent User Accounts)

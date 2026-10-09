@@ -49,17 +49,30 @@ function getJsonInput() {
 
 // Simple Session / Token Verification Helper
 function getAuthUser($pdo) {
-    $headers = getallheaders();
     $token = null;
-    if (isset($headers['Authorization'])) {
-        $matches = [];
-        if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
-            $token = $matches[1];
-        }
+
+    // 1. Try Authorization header
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
+    if (!$authHeader && function_exists('getallheaders')) {
+        $headers = getallheaders();
+        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
     }
-    
-    if (!$token && isset($_REQUEST['token'])) {
+
+    if ($authHeader && preg_match('/Bearer\s(\S+)/i', $authHeader, $matches)) {
+        $token = $matches[1];
+    }
+
+    // 2. Try $_REQUEST query/post
+    if (!$token && !empty($_REQUEST['token'])) {
         $token = $_REQUEST['token'];
+    }
+
+    // 3. Try JSON payload
+    if (!$token) {
+        $data = getJsonInput();
+        if (!empty($data['token'])) {
+            $token = $data['token'];
+        }
     }
 
     if (!$token) return null;

@@ -113,12 +113,23 @@ class LobbyManager {
     // 2. Create Room
     async createRoom(formData) {
         try {
+            const user = window.currentUser;
+            const token = localStorage.getItem('typeracer_auth_token') || '';
+            const username = user ? user.username : (formData.username || 'Pembalap');
+            const avatar = user ? user.avatar : (formData.avatar || 'car-red');
+
             const res = await fetch('api/lobby.php?action=create', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({
                     ...formData,
-                    player_token: this.playerToken
+                    player_token: this.playerToken,
+                    token: token,
+                    username: username,
+                    avatar: avatar
                 })
             });
             const data = await res.json();
@@ -136,15 +147,23 @@ class LobbyManager {
     async joinRoom(code, pin = '') {
         try {
             const user = window.currentUser;
+            const token = localStorage.getItem('typeracer_auth_token') || '';
+            const username = user ? user.username : 'Pembalap';
+            const avatar = user ? user.avatar : 'car-blue';
+
             const res = await fetch('api/lobby.php?action=join', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({
                     code: code.toUpperCase().trim(),
                     pin: pin,
                     player_token: this.playerToken,
-                    username: user ? user.username : undefined,
-                    avatar: user ? user.avatar : undefined
+                    token: token,
+                    username: username,
+                    avatar: avatar
                 })
             });
             const data = await res.json();
@@ -347,6 +366,46 @@ class LobbyManager {
                 </div>
             `;
         }).join('');
+
+        // Render Car Color Picker in Lobby
+        const colorPickerContainer = document.getElementById('waiting-lobby-color-picker');
+        if (colorPickerContainer && !colorPickerContainer.hasChildNodes()) {
+            const myPlayer = players.find(p => p.player_token === this.playerToken);
+            const myAvatar = myPlayer ? myPlayer.avatar : 'car-red';
+            colorPickerContainer.innerHTML = Object.keys(CAR_COLORS).map(key => `
+                <button type="button" onclick="lobbyManager.changeAvatar('${key}')" style="cursor: pointer; padding: 6px; border-radius: 10px; background: ${key === myAvatar ? 'rgba(56, 189, 248, 0.2)' : '#070b14'}; border: 1px solid ${key === myAvatar ? '#38bdf8' : '#1e293b'}; display: flex; align-items: center; justify-content: center;">
+                    ${getCarSVG(key, 36, 18)}
+                </button>
+            `).join('');
+        }
+    }
+
+    // Change Avatar in Room
+    async changeAvatar(avatar) {
+        if (!this.currentRoom) return;
+        try {
+            const token = localStorage.getItem('typeracer_auth_token') || '';
+            await fetch('api/lobby.php?action=change_avatar', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    code: this.currentRoom,
+                    player_token: this.playerToken,
+                    avatar: avatar,
+                    token: token
+                })
+            });
+            if (window.currentUser) {
+                window.currentUser.avatar = avatar;
+            }
+            // Clear color picker cache to re-highlight
+            const cp = document.getElementById('waiting-lobby-color-picker');
+            if (cp) cp.innerHTML = '';
+            this.syncRoom();
+        } catch (err) {}
     }
 
     // Toggle Ready

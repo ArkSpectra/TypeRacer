@@ -144,8 +144,15 @@
                             <h3 style="font-size: 14px; font-weight: 800; text-transform: uppercase; color: #94a3b8; margin-bottom: 14px;">
                                 👥 Pemain di Room (Menunggu Host Memulai)
                             </h3>
-                            <div id="waiting-players-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+                            <div id="waiting-players-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px;">
                                 <!-- Injected via lobby_manager.js -->
+                            </div>
+
+                            <div style="border-top: 1px solid #1e293b; padding-top: 14px;">
+                                <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px;">
+                                    🎨 Ganti Warna Mobil Anda
+                                </div>
+                                <div id="waiting-lobby-color-picker" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px;"></div>
                             </div>
                         </div>
                     </div>
